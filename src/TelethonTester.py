@@ -9,8 +9,8 @@ from config.redis_config import REDIS_CONF
 from telegram_connector.telegram_manager import InteractiveTelegramClient
 
 TELEGRAM_CLIENT_CONFIG = {
-    'session_name': '79633479629',
-    'phone_number': '+79633479629',
+    'session_name': '79633416018',
+    'phone_number': '+79633416018',
     'api_id': '22893',
     'api_hash': 'bfc342e48a7a0986b670777ed36fe0fb',
 }
@@ -21,11 +21,16 @@ rds_client = redis.StrictRedis(
     db=REDIS_CONF['db']
 )
 
+
 session_file_name = TELEGRAM_CLIENT_CONFIG['session_name'] + '.session'
 res_from_rds = rds_client.get(session_file_name)
-ses_file = open(session_file_name, 'w')
-ses_file.write(res_from_rds.decode('utf-8'))
-ses_file.close()
+try:
+    ses_file = open(session_file_name, 'x')
+except FileExistsError:
+    print('Файл сессии {} уже существует.'.format(session_file_name))
+else:
+    ses_file.write(res_from_rds.decode('utf-8'))
+    ses_file.close()
 client = InteractiveTelegramClient(
                 session_user_id=TELEGRAM_CLIENT_CONFIG['session_name'],
                 user_phone=TELEGRAM_CLIENT_CONFIG['phone_number'],
