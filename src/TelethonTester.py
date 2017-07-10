@@ -9,8 +9,8 @@ from config.redis_config import REDIS_CONF
 from telegram_connector.telegram_manager import InteractiveTelegramClient
 
 TELEGRAM_CLIENT_CONFIG = {
-    'session_name': '79052096468',
-    'phone_number': '+79052096468',
+    'session_name': '79633479629',
+    'phone_number': '+79633479629',
     'api_id': '22893',
     'api_hash': 'bfc342e48a7a0986b670777ed36fe0fb',
 }
